@@ -59,7 +59,7 @@ func clearSession(response http.ResponseWriter) {
 
 func loginHandler(response http.ResponseWriter, request *http.Request) {
 	name := request.FormValue("email")
-	pass := request.FormValue("password")
+	pass := GetMD5Hash(request.FormValue("password"))
 	db, err := sql.Open("mysql", "root:@/cyza?charset=utf8")
 	rows, err := db.Query("SELECT id,username,email FROM users WHERE email='" + name + "'  and password='" + pass + "'")
 	checkErr(err)
@@ -137,7 +137,7 @@ func registerHandler(response http.ResponseWriter, request *http.Request) {
 	} else {
 
 		name := request.FormValue("name")
-		password := request.FormValue("password")
+		password := GetMD5Hash(request.FormValue("password"))
 		email := request.FormValue("email")
 		db, err := sql.Open("mysql", "root:@/cyza?charset=utf8")
 
@@ -174,7 +174,7 @@ func lostHandler(response http.ResponseWriter, request *http.Request) {
 
 	} else {
 		email := request.FormValue("email")
-		db, err := sql.Open("mysql", "root:@/db?charset=utf8")
+		db, err := sql.Open("mysql", "root:@/cyza?charset=utf8")
 		rows, err := db.Query("SELECT email,password FROM users WHERE  email='" + email + "'")
 		checkErr(err)
 		user := []string{}
