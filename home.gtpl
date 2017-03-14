@@ -13,7 +13,8 @@
     <input class="form-control" type="email" id="email" name="email" value="chiheb.design@gmail.com">
     <label for="password">Password</label>
     <input class="form-control" type="password" id="password" name="password" value="nabil">
-    <button type="submit">Login</button>
+    <button class="btn btn-primary" type="submit">Login</button>
+    <a class="btn btn-default" href="/register">Register</a>
     <a class="btn btn-default" href="/lost">Lost Password</a>
 </form>
 </div>

@@ -72,7 +72,6 @@ func loginHandler(response http.ResponseWriter, request *http.Request) {
 		err = rows.Scan(&id, &username, &email)
 		checkErr(err)
 		user = append(user, username)
-		fmt.Println(id)
 
 	}
 
@@ -274,14 +273,14 @@ func checkErr(err error) {
 }
 func send(body string, to string) {
 	from := "chiheb.design@gmail.com"
-	pass := "..."
+	pass := ""
 
 	msg := "From: " + from + "\n" +
 		"To: " + to + "\n" +
 		"Subject: Your Password\n\n" +
 		body
 
-	err := smtp.SendMail("smtp.gmail.com:587",
+	err := smtp.SendMail("smtp.gmail.com:25",
 		smtp.PlainAuth("", from, pass, "smtp.gmail.com"),
 		from, []string{to}, []byte(msg))
 

@@ -9,13 +9,13 @@
        <h1>Fill Profile Information Page</h1>
 <form method="POST" action="/profil">
     <label for="full_name">Full Name</label>
-    <input type="text" id="full_name" name="full_name" value="nabil">
+    <input class="form-control" required type="text" id="full_name" name="full_name" value="nabil">
     <br>
     <label for="address">Address</label>
-    <input type="text" id="address" name="address" value="nabil">
+    <input class="form-control" required type="text" id="address" name="address" value="nabil">
     <br>
     <label for="phone">Phone</label>
-    <input type="text" id="phone" name="phone" value="">
+    <input class="form-control" required type="text" id="phone" name="phone" value="" required>
     <br>
     <button type="submit" class="btn btn-primary">Update</button>
 </form>

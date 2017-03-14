@@ -14,7 +14,7 @@
     <label for="password">Password</label>
     <input class="form-control" type="password" id="password" name="password" value="nabil">
     <label for="email">Email</label>
-    <input class="form-control" type="email" id="email" name="email" value="nabil">
+    <input class="form-control" type="email" id="email" name="email" value="chiheb.design@gmail.com">
     <button type="submit">Register</button>
     
 </form>
