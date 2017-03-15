@@ -6,16 +6,16 @@
 </head>
 <div class="row">
    <div class="container">
-       <h1>Fill Profile Information Page</h1>
-<form method="POST" action="/profil">
+       <h1>Edit Profile Information Page</h1>
+<form method="POST" action="/edit">
     <label for="full_name">Full Name</label>
-    <input class="form-control" required type="text" id="full_name" name="full_name" value="nabil">
+    <input class="form-control" required type="text" id="full_name" name="full_name" value="{{index . 1}}">
     <br>
     <label for="address">Address</label>
-    <input class="form-control" required type="text" id="autocomplete" name="address"  value="nabil">
+    <input class="form-control" required type="text" id="autocomplete" name="address"  value="{{index . 3}}">
     <br>
     <label for="phone">Phone</label>
-    <input class="form-control" required type="text" id="phone" name="phone" value="" required>
+    <input class="form-control" required type="text" id="phone" name="phone" value="{{index . 2}}" required>
     <br>
     <button type="submit" class="btn btn-primary">Update</button>
 </form>

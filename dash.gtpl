@@ -13,9 +13,9 @@
 	<div class="container">
 <p>User: {{index . 0}}</p>
 	  <p>FullName :{{index . 1}}</p>
-	  <p>Address : {{index . 2}}</p>
-	  <p>Phone : {{index . 3}}</p>	
+	  <p>Phone : {{index . 2}}</p>
+	  <p>Address : {{index . 3}}</p>	
 	   <p>Created : {{index . 4}}</p>	
-	  <a class="btn btn-default" href="/profil">Edit</a>
+	  <a class="btn btn-default" href="/edit">Edit</a>
 	</div>
 </div>

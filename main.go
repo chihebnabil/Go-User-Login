@@ -79,7 +79,7 @@ func loginHandler(response http.ResponseWriter, request *http.Request) {
 	if len(user) != 0 {
 		// .. check credentials ..
 		setSession(name, response)
-		redirectTarget = "/profil"
+		redirectTarget = "/edit"
 	}
 	http.Redirect(response, request, redirectTarget, 302)
 }
@@ -244,6 +244,48 @@ func profilHandler(response http.ResponseWriter, request *http.Request) {
 	}
 }
 
+func editHandler(response http.ResponseWriter, request *http.Request) {
+	userName := getUserName(request)
+	if userName != "" {
+		db, err := sql.Open("mysql", "root:@/cyza?charset=utf8")
+		checkErr(err)
+		if request.Method == "GET" {
+			rows, err := db.Query("SELECT email,full_name,phone,address,created FROM users WHERE email='" + userName + "'")
+			checkErr(err)
+			user := []string{}
+			for rows.Next() {
+				var email string
+				var full_name string
+				var phone string
+				var address string
+				var created string
+
+				rows.Scan(&email, &full_name, &phone, &address, &created)
+
+				user = append(user, email)
+				user = append(user, full_name)
+				user = append(user, phone)
+				user = append(user, address)
+				user = append(user, created)
+
+			}
+			t, _ := template.ParseFiles("edit.gtpl")
+			t.Execute(response, user)
+		} else {
+			full_name := request.FormValue("full_name")
+			address := request.FormValue("address")
+			phone := request.FormValue("phone")
+
+			db.Query("UPDATE users SET full_name='" + full_name + "' , address='" + address + "' , phone='" + phone + "' WHERE   email='" + userName + "'")
+			//checkErr(err)
+			http.Redirect(response, request, "/internal", 302)
+		}
+	} else {
+		http.Redirect(response, request, "/", 302)
+
+	}
+}
+
 // server main method
 
 var router = mux.NewRouter()
@@ -257,6 +299,7 @@ func main() {
 	router.HandleFunc("/lost", lostHandler).Methods("POST", "GET")
 	router.HandleFunc("/reset", resetHandler).Methods("POST", "GET")
 	router.HandleFunc("/profil", profilHandler).Methods("POST", "GET")
+	router.HandleFunc("/edit", editHandler).Methods("POST", "GET")
 	router.HandleFunc("/logout", logoutHandler).Methods("POST")
 
 	router.HandleFunc("/api/login", ApiLoginHandler).Methods("POST", "GET")
